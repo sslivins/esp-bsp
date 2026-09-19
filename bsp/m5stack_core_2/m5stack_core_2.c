@@ -164,8 +164,8 @@ static esp_err_t set_speaker_power(bool enable)
     ESP_RETURN_ON_ERROR(read8bit_checked(BSP_AXP2101_REG_ALDO_EN, &aldo_ctrl), TAG,
                         "Failed to read PMU reg 0x%02X", BSP_AXP2101_REG_ALDO_EN);
     const uint8_t speaker_power = enable
-                                      ? (uint8_t)(aldo_ctrl | BSP_AXP2101_ALDO3_BIT)
-                                      : (uint8_t)(aldo_ctrl & (uint8_t)(~BSP_AXP2101_ALDO3_BIT));
+                                  ? (uint8_t)(aldo_ctrl | BSP_AXP2101_ALDO3_BIT)
+                                  : (uint8_t)(aldo_ctrl & (uint8_t)(~BSP_AXP2101_ALDO3_BIT));
     if (speaker_power != aldo_ctrl) {
         const uint8_t spk_enable[] = {BSP_AXP2101_REG_ALDO_EN, speaker_power};
         ESP_RETURN_ON_ERROR(i2c_master_transmit(axp2101_h, spk_enable, sizeof(spk_enable), 1000),
@@ -489,7 +489,7 @@ esp_err_t bsp_display_brightness_init(void)
     // unrelated ALDO/BLDO enable bit.
     const uint8_t lcd_rst_low[] = {
         BSP_AXP2101_REG_ALDO_EN,
-        display_power & (uint8_t)(~BSP_AXP2101_ALDO2_BIT)
+        display_power &(uint8_t)(~BSP_AXP2101_ALDO2_BIT)
     };   // ALDO2 off: assert reset
     ESP_RETURN_ON_ERROR(i2c_master_transmit(axp2101_h, lcd_rst_low, sizeof(lcd_rst_low), 1000),
                         TAG, "I2C write failed");
