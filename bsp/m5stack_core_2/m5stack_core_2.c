@@ -66,6 +66,7 @@ static bool spi_initialized = false;
 static i2c_master_bus_handle_t i2c_handle = NULL;
 #if defined(CONFIG_BSP_PMU_AXP2101)
 static i2c_master_dev_handle_t axp2101_h = NULL;
+// Preserve an explicitly enabled speaker rail when display initialization sets the other rails.
 static bool speaker_power_enabled = false;
 #elif defined(CONFIG_BSP_PMU_AXP192)
 static i2c_master_dev_handle_t axp192_h = NULL;
